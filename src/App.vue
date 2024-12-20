@@ -1,30 +1,45 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { UploadFilled } from '@element-plus/icons-vue'
+import type { UploadUserFile } from 'element-plus'
+import { ref } from "vue";
+const fileList = ref<UploadUserFile[]>([])
+
+function onChange(params:UploadUserFile[]) {
+  console.log(params);
+  fileList.value = params;
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://electron-vite.github.io" target="_blank">
-      <img src="/electron-vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <el-upload
+    v-if="!fileList.length"
+    class="upload-demo"
+    drag
+    multiple
+    :auto-upload="false"
+    :show-file-list="false"
+    :on-change="onChange"
+  >
+    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+    <div class="el-upload__text">
+      拖拽文件到此处 <em>或点击上传</em>
+    </div>
+    <template #tip>
+      <div class="el-upload__tip">
+        转码后会在所选文件目录输出同名MP4文件
+      </div>
+    </template>
+  </el-upload>
+
+  <div v-if="fileList.length">
+    <div v-for="file in fileList" :key="file.name">{{ file.name }}</div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style >
+.upload-demo{
+  width: 400px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>

@@ -74,7 +74,7 @@ ipcMain.on('start-ffmpeg', (event, filePath) => {
 
   
 // 取消转码
-ipcMain.on('cancel-ffmpeg', (event, files) => {
+ipcMain.on('cancel-ffmpeg', (event) => {
     if (ffmpegProcess) {
         console.log(`取消 FFmpeg 转码，终止子进程 PID: ${ffmpegProcess.pid}`);
         ffmpegProcess.kill('SIGTERM'); // 向子进程发送终止信号

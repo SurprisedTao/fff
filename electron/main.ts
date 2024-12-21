@@ -2,15 +2,12 @@ import { app, BrowserWindow  } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import "./fff";
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 
-// 根据操作系统动态设置 FFmpeg 路径
-const ffmpegPath = process.platform === 'win32'
-    ? path.join(__dirname, 'resources', 'ffmpeg.exe') // Windows 平台
-    : path.join(__dirname, 'resources', 'ffmpeg');    // macOS/Linux 平台
 
 
 // The built directory structure

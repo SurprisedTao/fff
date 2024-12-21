@@ -1,13 +1,15 @@
 import { ipcMain  } from 'electron'
 import { spawn , ChildProcessWithoutNullStreams } from 'child_process'
 import path from 'node:path'
+import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname('../')
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // 根据操作系统动态设置 FFmpeg 路径
 const ffmpegPath = process.platform === 'win32'
-    ? path.join(__dirname, 'resources', 'ffmpeg.exe') // Windows 平台
-    : path.join(__dirname, 'resources', 'ffmpeg');    // macOS/Linux 平台
-
+    ? path.join(__dirname, '../resources', 'ffmpeg.exe') // Windows 平台
+    : path.join(__dirname, '../resources', 'ffmpeg');    // macOS/Linux 平台
+console.log(`ffmpegPath: ${ffmpegPath}`)
 // 开始转码
 let ffmpegProcess:ChildProcessWithoutNullStreams|null = null;
 

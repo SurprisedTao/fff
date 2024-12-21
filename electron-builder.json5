@@ -1,18 +1,16 @@
 // @see - https://www.electron.build/configuration/configuration
 {
-  $schema: "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   appId: "YourAppID",
   asar: true,
   productName: "淘转码",
   directories: {
     output: "release/${version}",
   },
-  files: ["dist", "dist-electron"],
+  files: ["dist", "resources/**/*", "dist-electron"],
   extraResources: [
     {
-      from: "resources/",
-      to: "resources",
-      filter: ["**/*"],
+      from: "./resources/",
+      to: "./resources",
     },
   ],
   mac: {

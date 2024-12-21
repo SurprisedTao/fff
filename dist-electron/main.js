@@ -47,12 +47,12 @@ ipcMain.on("start-ffmpeg", (event, filePath) => {
       if (totalDuration > 0) {
         const progress = currentTime / totalDuration * 100;
         console.log(`当前进度：${progress}%`);
-        event.sender.send("progress", input, progress);
+        event.sender.send("ffmpeg-progress", progress);
       }
     }
   });
   ffmpegProcess.on("close", (code) => {
-    event.sender.send("success", input, code);
+    event.sender.send("ffmpeg-success", input, code);
     ffmpegProcess = null;
   });
 });
